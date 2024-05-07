@@ -14,8 +14,6 @@ function fetchAllArticles(){
 
 function fetchArticleById(articleId){
 
-
-    
     return axios.get(`https://nc-news-ldv7.onrender.com/api/articles/${articleId}`).then((response) => {
         return response.data
     })
@@ -26,6 +24,18 @@ function fetchArticleById(articleId){
 
 
 
+///api/articles/:article:id/comments
+function fetchCommentsByArticleId(articleId){
+
+    return axios.get(`https://nc-news-ldv7.onrender.com/api/articles/${articleId}/comments`).then((response) => {
+        return response.data.comments
+    })
+    .catch((err) => {
+        console.log(err);
+    })
+}
 
 
-export {fetchAllArticles,fetchArticleById}
+
+
+export {fetchAllArticles,fetchArticleById,fetchCommentsByArticleId}

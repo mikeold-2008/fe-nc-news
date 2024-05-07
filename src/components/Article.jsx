@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from 'react-router-dom';
 import { fetchArticleById } from "../utils/fetchFunctions";
+import CommentList from "./CommentList";
 
 function Article(){
 
@@ -17,12 +18,18 @@ function Article(){
 
 
     return (
+        <>
         <div id="article">
             <h1>{articleData.title}</h1>
             <img src={articleData.article_img_url} alt="" />
             <p><b>{articleData.author}</b></p>
             <p>{articleData.body}</p>
         </div>
+        <br></br>
+
+        <CommentList article_id={article_id}>
+        </CommentList>
+        </>
     )
 }
 
