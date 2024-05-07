@@ -24,6 +24,11 @@ function Article(){
             <img src={articleData.article_img_url} alt="" />
             <p><b>{articleData.author}</b></p>
             <p>{articleData.body}</p>
+            
+            <p><b> Votes: </b>{articleData.votes}
+            <br></br>
+            <button>Like </button>
+            </p>
         </div>
         <br></br>
 
