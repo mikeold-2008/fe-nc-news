@@ -36,3 +36,8 @@
 #article-list-item h3{
   word-wrap: break-word;
 }
+
+
+#article img{
+  width:80%
+}

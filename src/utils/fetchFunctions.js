@@ -12,6 +12,20 @@ function fetchAllArticles(){
 
 
 
+function fetchArticleById(articleId){
 
 
-export {fetchAllArticles}
+    
+    return axios.get(`https://nc-news-ldv7.onrender.com/api/articles/${articleId}`).then((response) => {
+        return response.data
+    })
+    .catch((err) => {
+        console.log(err);
+    })
+}
+
+
+
+
+
+export {fetchAllArticles,fetchArticleById}
