@@ -3,6 +3,36 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
+#navbar{
+  background-color: blue;
+}
+
+#article-list{
+  display:flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-content:space-between;
+}
+
+#article-list-item{
+  display:flex;
+  flex-direction: column;
+  flex-wrap:wrap;
+  align-items:center;
+  align-content:center;
+  margin:20px;
+  border-style:groove;
+  border-color:blue;
+  width:90%
+}
+
+#article-list-item img{
+  width:70%;
+}
+
+#article-list-item h3{
+  word-wrap: break-word;
+}
