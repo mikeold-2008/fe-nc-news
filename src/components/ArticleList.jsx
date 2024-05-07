@@ -1,4 +1,4 @@
-import { fetchAllArticles } from "../utils/fetchFunctions"
+import { fetchAllArticles } from "../utils/getFunctions"
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 

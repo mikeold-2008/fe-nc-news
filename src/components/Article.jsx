@@ -1,20 +1,37 @@
 import { useState, useEffect } from "react";
 import { useParams } from 'react-router-dom';
-import { fetchArticleById } from "../utils/fetchFunctions";
+import { fetchArticleById } from "../utils/getFunctions";
 import CommentList from "./CommentList";
+import patchArticleVote from "../utils/patchFunctions";
+
 
 function Article(){
 
     const [articleData, setArticleData] = useState({});
     const {article_id} = useParams()
-
+    const [voteCount,setVoteCount] = useState(0)
+    const[voteChange,setVoteChange] = useState(0)
+    const [err, setErr] = useState(null);
 
     useEffect(()=>{
         fetchArticleById(article_id)
         .then((article)=>{
             setArticleData(article)
+            setVoteCount(article.votes)
         })
     },[article_id])
+
+
+    const handleVote = (vote) =>{
+
+        setVoteCount((currentCount) => currentCount + vote)
+        patchArticleVote(article_id,vote)
+        .catch((err)=>{
+            setVoteCount((currentCount) => currentCount + vote)
+            setErr('Something went wrong, please try again.')
+        })
+        setVoteChange((currVoteChange) => (currVoteChange + vote))
+    }
 
 
     return (
@@ -25,11 +42,15 @@ function Article(){
             <p><b>{articleData.author}</b></p>
             <p>{articleData.body}</p>
             
-            <p><b> Votes: </b>{articleData.votes}
-            <br></br>
-            <button>Like </button>
+            <p><b> Votes: </b>{voteCount}</p>
+            {err ? <p>{err}</p> : null}
+            <p>
+                <button hidden={voteChange === 1} onClick={()=>{handleVote(1)}}>Like this article</button>  
+
+                <button hidden={voteChange < 1} onClick={()=>{handleVote(-1)}}>Unlike this article</button>                            
             </p>
         </div>
+        <br></br>
         <br></br>
 
         <CommentList article_id={article_id}>
