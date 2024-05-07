@@ -1,4 +1,4 @@
-import { fetchCommentsByArticleId } from "../utils/fetchFunctions"
+import { fetchCommentsByArticleId } from "../utils/getFunctions"
 import { useState, useEffect } from "react";
 
 function CommentList({article_id}){
