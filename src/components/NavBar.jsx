@@ -5,6 +5,7 @@ import { UserContext } from "../contexts/User";
 function NavBar (){
   const loggedInUser = useContext(UserContext)
 
+  const topics =["coding","football","cooking"]
     return (
         <div id="navbar">
           
@@ -15,18 +16,11 @@ function NavBar (){
         <button>Home</button>
         </Link>
 
-        <Link to="/articles/coding">
-        <button>Coding</button>
-        </Link>
-
-        <Link to="/articles/football">
-        <button>Football</button>
-        </Link>
-
-        <Link to="/articles/cooking">
-        <button>Cooking</button>
-        </Link>
-
+        {topics.map((topic, index)=>{
+         return <Link to={`/articles/topic/${topic}`} key={index}>
+          <button>{topic.charAt(0).toUpperCase()+topic.slice(1,topic.length)}</button>
+          </Link>
+        })}
 
         </div>
       )

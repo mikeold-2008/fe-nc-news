@@ -25,6 +25,10 @@ function App() {
       element={<Article></Article>}>
       </Route>
 
+      <Route path="/articles/topic/:topic" 
+      element={<ArticleList></ArticleList>}>
+      </Route>
+
 
 
     </Routes>

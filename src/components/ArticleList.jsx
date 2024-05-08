@@ -1,17 +1,22 @@
-import { fetchAllArticles } from "../utils/getFunctions"
+import { fetchAllArticles, fetchArticles } from "../utils/getFunctions"
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useParams } from 'react-router-dom';
 
 function ArticleList(){
 
+    const { topic } = useParams();
     const [articleList, setArticleList] = useState([])
 
+
     useEffect(()=>{
-        fetchAllArticles()
+        fetchArticles(topic)
         .then((articles)=>{
             setArticleList(articles)
         })
-    },[])
+        
+    },[topic])
+
 
     return (
         <div id="article-list">
