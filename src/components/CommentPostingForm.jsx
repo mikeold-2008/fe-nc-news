@@ -1,47 +1,54 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import postArticleComment from "../utils/postFunctions";
 import { useParams } from 'react-router-dom';
+import { UserContext } from "../contexts/User";
 
-function CommentPostingForm({commentList,setCommentList}){
+function CommentPostingForm({ setNewCommentPosted, err,setErr,feedback,setFeedback}){
 
-    const [err, setErr] = useState(null)
-    const [feedback,setFeedback]=useState(null)
+    const loggedInUser = useContext(UserContext)
+
+
     const {article_id} = useParams()
     const [comment,setComment]=useState({
-        author:"cooljmessy",
+        author:loggedInUser.user,
         body:""
     })
     const [loading,setLoading] = useState(false)
 
 
   function handleSubmit(event){
-    setLoading(true)
     event.preventDefault()
     if(comment.body.length > 2){
-        if(setLoading){
-            setFeedback("Attempting to post comment...")
-        }
+        setLoading(true)
         postArticleComment(article_id,comment.author,comment.body)
         .then(()=>{
             setLoading(false)
-            setErr(null)
+            setNewCommentPosted(true)
             setFeedback("Comment posted successfully!")
+            setErr(null)
         })
         .catch((err)=>{
+            setLoading(false)
+            setNewCommentPosted(false)
             setFeedback(null)
             setErr('Something went wrong, please try again.')
-            setCommentList(commentList.slice(0,-1))
         })
-        setCommentList([...commentList,comment])
     } 
     else{
+        setLoading(false)
         setErr('A comment must be at least 3 characters.')
+        setFeedback(null)
     }
+    setNewCommentPosted(false)
+    setComment({
+        author:loggedInUser.user,
+        body:""
+    })
   }
 
   function handleInputChange(event){
     setComment({
-        author: "cooljmessy",
+        author: loggedInUser.user,
         body: event.target.value
     })
 
@@ -51,11 +58,13 @@ function CommentPostingForm({commentList,setCommentList}){
     return(<>
     <form>
         <br></br>
-        {err ? <p style={{color:'red'}}>{err}</p> : <p style={{color:'green'}}>{feedback}</p>}
+        {loading ? <p>Attempting to post comment...</p> : null}
+        {err && (!feedback) ? <p style={{color:'red'}}>{err}</p> : null}
+        {feedback && (!err) ? <p style={{color:'green'}}>{feedback}</p> : null}
         <label htmlFor="comment_text_box">Leave a comment </label>
-        <p>
-        <textarea name="comment_text_box" rows="7" cols="30" required onChange={handleInputChange}></textarea>
-        </p>
+
+        <textarea name="comment_text_box" value={comment.body}  rows="7" cols="30" required onChange={handleInputChange}></textarea>
+        <br></br>
         <button disabled={loading===true} onClick={handleSubmit}>Submit</button>
 
 
