@@ -55,6 +55,8 @@ function Article(){
 
         <CommentList article_id={article_id}>
         </CommentList>
+
+
         </>
     )
 }
