@@ -23,8 +23,6 @@ function fetchArticleById(articleId){
 }
 
 
-
-///api/articles/:article:id/comments
 function fetchCommentsByArticleId(articleId){
 
     return axios.get(`https://nc-news-ldv7.onrender.com/api/articles/${articleId}/comments`).then((response) => {

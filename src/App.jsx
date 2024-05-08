@@ -4,12 +4,14 @@ import './App.css'
 import NavBar from "./components/NavBar"
 import ArticleList from './components/ArticleList';
 import Article from './components/Article';
+import { UserProvider } from './contexts/User';
 
 
 
 function App() {
 
   return (
+    <UserProvider>
       <div>
     <NavBar></NavBar>
     <Routes>  
@@ -28,6 +30,7 @@ function App() {
     </Routes>
     
     </div>
+    </UserProvider>
   )
 }
 
