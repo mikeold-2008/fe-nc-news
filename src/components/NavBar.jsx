@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { UserContext } from "../contexts/User";
 
-function NavBar ({setSortCriteria,setSortOrder,}){
+function NavBar ({setSortCriteria,setSortOrder}){
   const loggedInUser = useContext(UserContext)
   const topics = ["coding","football","cooking"]
 
@@ -13,7 +13,6 @@ function NavBar ({setSortCriteria,setSortOrder,}){
           
         <h1>NC News!</h1>
 
-        
         <Link to="/">
         <button>Home</button>
         </Link>
@@ -42,8 +41,6 @@ function NavBar ({setSortCriteria,setSortOrder,}){
         </select>
         </form>
         <p id="logged-in-user-display">Logged in as: {(loggedInUser.user)}</p>
-        
-
         </div>
       )
 

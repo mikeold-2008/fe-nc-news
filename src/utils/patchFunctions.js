@@ -9,9 +9,6 @@ function patchArticleVote(articleId,vote){
      .then((response)=>{
         return response
      })
-    .catch((err) => {
-        console.log(err);
-    })
 
 }
 

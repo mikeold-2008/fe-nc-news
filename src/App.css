@@ -63,6 +63,7 @@
   font-size:65%;
 }
 
-#comment-label{
+#sort-label{
+  font-size:smaller;
   display:inline;
 }

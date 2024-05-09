@@ -13,17 +13,24 @@ function Article(){
     const [voteCount,setVoteCount] = useState(0)
     const[voteChange,setVoteChange] = useState(0)
     const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(true)
 
     useEffect(()=>{
         fetchArticleById(article_id)
         .then((article)=>{
+            setLoading(false)
             setArticleData(article)
             setVoteCount(article.votes)
         })
         .catch((err) => {
+            setLoading(false)
             setError({err})
         })
     },[article_id])
+
+    if(loading){
+        return <p>Loading...</p>
+    }
 
     if(error){
         return (<ErrorPage error={error.err.message}></ErrorPage>)

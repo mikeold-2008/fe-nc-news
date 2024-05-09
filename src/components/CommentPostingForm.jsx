@@ -1,13 +1,11 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 import postArticleComment from "../utils/postFunctions";
 import { useParams } from 'react-router-dom';
 import { UserContext } from "../contexts/User";
 
-function CommentPostingForm({ setNewCommentPosted, err,setErr,feedback,setFeedback}){
+function CommentPostingForm({ err,setErr,feedback,setFeedback,commentList,setCommentList}){
 
     const loggedInUser = useContext(UserContext)
-
-
     const {article_id} = useParams()
     const [comment,setComment]=useState({
         author:loggedInUser.user,
@@ -21,17 +19,16 @@ function CommentPostingForm({ setNewCommentPosted, err,setErr,feedback,setFeedba
     if(comment.body.length > 2){
         setLoading(true)
         postArticleComment(article_id,comment.author,comment.body)
-        .then(()=>{
+        .then((response)=>{
             setLoading(false)
-            setNewCommentPosted(true)
-            setFeedback("Comment posted successfully!")
+            setFeedback("Comment #"+response.comment.comment_id+ " posted successfully! ")
             setErr(null)
+            setCommentList([...commentList, response.comment])
         })
         .catch((err)=>{
             setLoading(false)
-            setNewCommentPosted(false)
             setFeedback(null)
-            setErr('Something went wrong, please try again.')
+            setErr('Something went wrong when trying to post the comment, please try again.')
         })
     } 
     else{
@@ -39,7 +36,6 @@ function CommentPostingForm({ setNewCommentPosted, err,setErr,feedback,setFeedba
         setErr('A comment must be at least 3 characters.')
         setFeedback(null)
     }
-    setNewCommentPosted(false)
     setComment({
         author:loggedInUser.user,
         body:""
@@ -51,7 +47,6 @@ function CommentPostingForm({ setNewCommentPosted, err,setErr,feedback,setFeedba
         author: loggedInUser.user,
         body: event.target.value
     })
-
   }
 
 
@@ -65,11 +60,7 @@ function CommentPostingForm({ setNewCommentPosted, err,setErr,feedback,setFeedba
         <p id='comment-label'>Leave a comment</p><br></br>
         <textarea name="comment_text_box" value={comment.body}  rows="7" cols="30" required onChange={handleInputChange}></textarea>
         <br></br>
-        <button disabled={loading===true} onClick={handleSubmit}>Submit</button>
-
-
-
-    
+        <button disabled={loading===true} onClick={handleSubmit}>Submit</button>    
     </form>
     </>)
 

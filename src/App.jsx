@@ -18,15 +18,16 @@ function App() {
   return (
     <UserProvider>
       <div>
-    <NavBar setSortCriteria={setSortCriteria} setSortOrder={setSortOrder}></NavBar>
+    <NavBar setSortCriteria={setSortCriteria} setSortOrder={setSortOrder} ></NavBar>
     <Routes>  
 
 
 
       <Route 
       path="/" 
-      element={<ArticleList sortCriteria={sortCriteria} sortOrder={sortOrder} ></ArticleList>}>
+      element={<ArticleList sortCriteria={sortCriteria} sortOrder={sortOrder}></ArticleList>}>
       </Route>
+
 
       <Route path="/articles/:article_id" 
       element={<Article></Article>}>

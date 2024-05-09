@@ -9,26 +9,31 @@ function ArticleList({sortCriteria,sortOrder}){
     const [articleList, setArticleList] = useState([])
     const [searchParams, setSearchParams] = useSearchParams();
     const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(true)
 
 
-
-    
 
     useEffect(()=>{
         fetchArticles(topic,sortCriteria,sortOrder)
         .then((articles)=>{
+            setError(null)
+            setLoading(false)
             setArticleList(articles)
             setSearchParams({ 
                 'sort_by': sortCriteria,
                 'order': sortOrder
                })
         }).catch((err) => {
+            setLoading(false)
             setError({err})
         })
         
     },[topic,sortCriteria,sortOrder,searchParams])
 
 
+    if(loading){
+        return <p>Loading...</p>
+    }
 
     if(error){
         return (<ErrorPage error={error.err.message}></ErrorPage>)

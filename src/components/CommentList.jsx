@@ -10,20 +10,22 @@ function CommentList({article_id}){
    const loggedInUser = useContext(UserContext)
    const [commentList,setCommentList] = useState([])
    const [err, setErr] = useState(null);
-   const [newCommentPosted,setNewCommentPosted]= useState(false)
-   const [commentDeleted,setCommentDeleted] = useState(false)
-   const [loading,setLoading] = useState(false)
+   const [loading,setLoading] = useState(true)
    const [feedback,setFeedback]=useState(null)
 
    useEffect(()=>{
     fetchCommentsByArticleId(article_id)
     .then((comments)=>{
+        setLoading(false)
         setCommentList(comments)
     })
     .catch((err)=>{
-        setErr('Something went wrong, please try again.')
+        setLoading(false)
+        if(!err.message.includes("404")){
+            setErr('Something went wrong while fetching the comments, please try again.')
+        }
     })
-   },[article_id,newCommentPosted,commentDeleted])
+   },[article_id,feedback,err])
 
 
    function handleDelete(event){
@@ -34,27 +36,30 @@ function CommentList({article_id}){
         .then((response)=>{
             setLoading(false)
             setErr(null)
-            setFeedback("Comment deleted successfully!")
-            setCommentDeleted(true)
+            setFeedback("Comment #" + event.target.value +" deleted successfully!")
+            setCommentList(commentList.slice(0,commentList.indexOf(event.target.value)))
+
         })
         .catch((err)=>{
             setLoading(false)
-            setErr('Something went wrong, please try again.')
+            setErr('Something went wrong when trying to delete the comment, please try again.')
             setFeedback(null)
-            setCommentDeleted(false)
-        })
-        setCommentDeleted(false)
+        })   
    }
    
+   if(loading){
+    return <p>Loading...</p>
+   }
    
     return (
        <div id="comment-list">
-        <CommentPostingForm  setNewCommentPosted={setNewCommentPosted}
+        <CommentPostingForm  
         err={err} setErr={setErr}
-        feedback={feedback} setFeedback={setFeedback}></CommentPostingForm>
+        feedback={feedback} setFeedback={setFeedback} commentList={commentList} setCommentList={setCommentList}></CommentPostingForm>
         <br></br>
         <br></br>
         <h4>Comments</h4>
+        {(commentList.length===0) ? <p>This article has no comments yet</p> : null}
         {commentList.map((comment,index)=>{
             return (<div id="comment-box" 
                     key={index}>

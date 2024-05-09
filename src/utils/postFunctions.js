@@ -7,11 +7,8 @@ function postArticleComment(articleId,author,body){
         "body": body
         })
      .then((response)=>{
-        return response
+        return response.data
      })
-    .catch((err) => {
-        console.log(err);
-    })
 }
 
 export default postArticleComment

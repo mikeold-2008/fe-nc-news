@@ -1,17 +1,5 @@
 import axios from 'axios'
 
-function fetchAllArticles(){
-
-    return axios.get('https://nc-news-ldv7.onrender.com/api/articles').then((response) => {
-        return(response.data.articles);
-    })
-    .catch((err) => {
-        console.log(err);
-    })
-}
-
-
-
 function fetchArticleById(articleId){
 
     return axios.get(`https://nc-news-ldv7.onrender.com/api/articles/${articleId}`)
@@ -49,4 +37,4 @@ function fetchArticles(topic,sort,order){
 
 
 
-export {fetchAllArticles,fetchArticleById,fetchCommentsByArticleId,fetchArticles}
+export {fetchArticleById,fetchCommentsByArticleId,fetchArticles}
