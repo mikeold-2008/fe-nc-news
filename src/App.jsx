@@ -5,6 +5,7 @@ import NavBar from "./components/NavBar"
 import ArticleList from './components/ArticleList';
 import Article from './components/Article';
 import { UserProvider } from './contexts/User';
+import ErrorPage from './components/ErrorPage';
 
 
 
@@ -20,6 +21,8 @@ function App() {
     <NavBar setSortCriteria={setSortCriteria} setSortOrder={setSortOrder}></NavBar>
     <Routes>  
 
+
+
       <Route 
       path="/" 
       element={<ArticleList sortCriteria={sortCriteria} sortOrder={sortOrder} ></ArticleList>}>
@@ -34,6 +37,8 @@ function App() {
       </Route>
 
 
+
+      <Route path="*" element={<ErrorPage/>}/>
 
     </Routes>
     

@@ -49,7 +49,6 @@ function CommentList({article_id}){
    
     return (
        <div id="comment-list">
-
         <CommentPostingForm  setNewCommentPosted={setNewCommentPosted}
         err={err} setErr={setErr}
         feedback={feedback} setFeedback={setFeedback}></CommentPostingForm>
@@ -65,9 +64,7 @@ function CommentList({article_id}){
                     {loggedInUser.user===comment.author ? 
                     <button disabled={loading===true} onClick={handleDelete} value={comment.comment_id}>Delete this comment </button> 
                     : null}
-
                     </div>
-
             )
         })}
 

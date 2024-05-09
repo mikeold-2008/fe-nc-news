@@ -1,18 +1,15 @@
 import { fetchArticles } from "../utils/getFunctions"
 import { useState, useEffect } from "react";
 import { Link, useParams, useSearchParams } from "react-router-dom";
+import ErrorPage from "./ErrorPage";
 
 function ArticleList({sortCriteria,sortOrder}){
 
     const { topic } = useParams();
     const [articleList, setArticleList] = useState([])
     const [searchParams, setSearchParams] = useSearchParams();
-    const dateOptions = {
-        weekday: "long",
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-      };
+    const [error, setError] = useState(null);
+
 
 
     
@@ -25,10 +22,17 @@ function ArticleList({sortCriteria,sortOrder}){
                 'sort_by': sortCriteria,
                 'order': sortOrder
                })
+        }).catch((err) => {
+            setError({err})
         })
         
-    },[topic,sortCriteria,sortOrder])
+    },[topic,sortCriteria,sortOrder,searchParams])
 
+
+
+    if(error){
+        return (<ErrorPage error={error.err.message}></ErrorPage>)
+    }
 
     return (
         <div id="article-list">

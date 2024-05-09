@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { fetchArticleById } from "../utils/getFunctions";
 import CommentList from "./CommentList";
 import patchArticleVote from "../utils/patchFunctions";
+import ErrorPage from "./ErrorPage";
 
 
 function Article(){
@@ -11,7 +12,7 @@ function Article(){
     const {article_id} = useParams()
     const [voteCount,setVoteCount] = useState(0)
     const[voteChange,setVoteChange] = useState(0)
-    const [err, setErr] = useState(null);
+    const [error, setError] = useState(null);
 
     useEffect(()=>{
         fetchArticleById(article_id)
@@ -19,16 +20,23 @@ function Article(){
             setArticleData(article)
             setVoteCount(article.votes)
         })
+        .catch((err) => {
+            setError({err})
+        })
     },[article_id])
+
+    if(error){
+        return (<ErrorPage error={error.err.message}></ErrorPage>)
+    }
 
 
     const handleVote = (vote) =>{
 
         setVoteCount((currentCount) => currentCount + vote)
         patchArticleVote(article_id,vote)
-        .catch((err)=>{
+        .catch((error)=>{
             setVoteCount((currentCount) => currentCount + vote)
-            setErr('Something went wrong, please try again.')
+            setError('Something went wrong, please try again.')
         })
         setVoteChange((currVoteChange) => (currVoteChange + vote))
     }
@@ -43,7 +51,7 @@ function Article(){
             <p>{articleData.body}</p>
             
             <p><b> Votes: </b>{voteCount}</p>
-            {err ? <p>{err}</p> : null}
+            {error ? <p>{error}</p> : null}
             <p>
                 <button hidden={voteChange === 1} onClick={()=>{handleVote(1)}}>Like this article</button>  
 
