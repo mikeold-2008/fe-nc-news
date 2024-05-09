@@ -10,15 +10,19 @@ import { UserProvider } from './contexts/User';
 
 function App() {
 
+  const [sortCriteria,setSortCriteria] = useState("created_at")
+  const [sortOrder,setSortOrder] = useState("desc")
+
+
   return (
     <UserProvider>
       <div>
-    <NavBar></NavBar>
+    <NavBar setSortCriteria={setSortCriteria} setSortOrder={setSortOrder}></NavBar>
     <Routes>  
 
       <Route 
       path="/" 
-      element={<ArticleList></ArticleList>}>
+      element={<ArticleList sortCriteria={sortCriteria} sortOrder={sortOrder} ></ArticleList>}>
       </Route>
 
       <Route path="/articles/:article_id" 
@@ -26,7 +30,7 @@ function App() {
       </Route>
 
       <Route path="/articles/topic/:topic" 
-      element={<ArticleList></ArticleList>}>
+      element={<ArticleList sortCriteria={sortCriteria} sortOrder={sortOrder}></ArticleList>}>
       </Route>
 
 

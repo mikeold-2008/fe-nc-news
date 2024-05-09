@@ -7,7 +7,7 @@
 }
 
 #navbar{
-  background-color: blue;
+  background-color: rgb(0, 166, 255);
 }
 
 #article-list{
@@ -25,7 +25,7 @@
   align-content:center;
   margin:20px;
   border-style:groove;
-  border-color:blue;
+  border-color:rgb(0, 166, 255);
   width:90%
 }
 
@@ -61,4 +61,9 @@
 
 #logged-in-user-display{
   font-size:65%;
+}
+
+#sort-label{
+  font-size:smaller;
+  display:inline;
 }

@@ -1,21 +1,33 @@
-import { fetchAllArticles, fetchArticles } from "../utils/getFunctions"
+import { fetchArticles } from "../utils/getFunctions"
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { useParams } from 'react-router-dom';
+import { Link, useParams, useSearchParams } from "react-router-dom";
 
-function ArticleList(){
+function ArticleList({sortCriteria,sortOrder}){
 
     const { topic } = useParams();
     const [articleList, setArticleList] = useState([])
+    const [searchParams, setSearchParams] = useSearchParams();
+    const dateOptions = {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      };
 
+
+    
 
     useEffect(()=>{
-        fetchArticles(topic)
+        fetchArticles(topic,sortCriteria,sortOrder)
         .then((articles)=>{
             setArticleList(articles)
+            setSearchParams({ 
+                'sort_by': sortCriteria,
+                'order': sortOrder
+               })
         })
         
-    },[topic])
+    },[topic,sortCriteria,sortOrder])
 
 
     return (
@@ -29,6 +41,7 @@ function ArticleList(){
                     <img src={article.article_img_url} alt="Featured image for an article" />
                     </Link>
                     <p><b>Author: {article.author}</b></p>
+                    <p>Votes: {article.votes} Comments: {article.comment_count} Date: {article.created_at.slice(0,article.created_at.indexOf("T"))}</p>
                     </div>
             })}
         
