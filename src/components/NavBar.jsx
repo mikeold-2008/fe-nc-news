@@ -40,7 +40,6 @@ function NavBar ({setSortCriteria,setSortOrder,}){
         <option value="desc">Desc.</option>
         <option value="asc">Asc.</option>
         </select>
-        {/* <button onClick={handleSubmit}>Sort</button> */}
         </form>
         <p id="logged-in-user-display">Logged in as: {(loggedInUser.user)}</p>
         

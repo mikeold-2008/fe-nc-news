@@ -61,8 +61,8 @@ function CommentPostingForm({ setNewCommentPosted, err,setErr,feedback,setFeedba
         {loading ? <p>Attempting to post comment...</p> : null}
         {err && (!feedback) ? <p style={{color:'red'}}>{err}</p> : null}
         {feedback && (!err) ? <p style={{color:'green'}}>{feedback}</p> : null}
-        <label htmlFor="comment_text_box">Leave a comment </label>
-
+        <label htmlFor="comment_text_box"></label>
+        <p id='comment-label'>Leave a comment</p><br></br>
         <textarea name="comment_text_box" value={comment.body}  rows="7" cols="30" required onChange={handleInputChange}></textarea>
         <br></br>
         <button disabled={loading===true} onClick={handleSubmit}>Submit</button>
