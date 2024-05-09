@@ -35,11 +35,13 @@ function fetchCommentsByArticleId(articleId){
 }
 
 
-function fetchArticles(topic){
+function fetchArticles(topic,sort,order){
 
     return axios.get(`https://nc-news-ldv7.onrender.com/api/articles/`,
     {params:{
-        topic: topic
+        "topic": topic,
+        "sort_by": sort,
+        "order": order
     }
         
     })
