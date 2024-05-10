@@ -1,8 +1,30 @@
-# React + Vite
+*NC News React App*
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+*Introduction*
+This front-end app was built in React, as part of a Northcoders software development bootcamp. It provides a Reddit-style user interface for the corresponding news API which was built during back-end project phase.
 
-Currently, two official plugins are available:
+The design is mobile-first but and reactive so should function well on other displays.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Live Link: https://nc-news-online.netlify.app/
+GitHub for back end: https://github.com/mikeold-2008/nc-news
+Hosted back end: https://nc-news-ldv7.onrender.com/api
+
+*Features*
+Users can view a list of articles, as well as filtering them by topic, and sorting by given sort criteria such as comments, votes or date (asc. or desc.). Users can also read articles, upvote them, comment (inc. deletion) and read previous comments. 
+
+A username is hardcoded into the application which is used for creation and deletion of comments (users can only delete those comments which they have posted).
+
+*Setup*
+
+Ensure that you have Node.js installed, minimum version 18.13.0
+
+You will need to fork and clone this repo: 
+https://github.com/mikeold-2008/fe-nc-news.git  
+if you wish to make changes or run the code in a dev environment.
+
+With the repo open in Terminal, make sure to install dependencies by running the command: 
+npm install
+
+Next, you can run the command: 
+npm run dev 
+in order to open up a local copy of the NC News site. 
