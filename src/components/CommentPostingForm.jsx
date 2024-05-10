@@ -1,7 +1,7 @@
-import { useState, useContext } from "react";
-import postArticleComment from "../utils/postFunctions";
-import { useParams } from 'react-router-dom';
-import { UserContext } from "../contexts/User";
+import { useState, useContext } from "react"
+import postArticleComment from "../utils/postFunctions"
+import { useParams } from 'react-router-dom'
+import { UserContext } from "../contexts/User"
 
 function CommentPostingForm({ err,setErr,feedback,setFeedback,commentList,setCommentList}){
 
@@ -51,16 +51,16 @@ function CommentPostingForm({ err,setErr,feedback,setFeedback,commentList,setCom
 
 
     return(<>
-    <form>
+    <form onSubmit={handleSubmit}>
         <br></br>
         {loading ? <p>Attempting to post comment...</p> : null}
         {err && (!feedback) ? <p style={{color:'red'}}>{err}</p> : null}
         {feedback && (!err) ? <p style={{color:'green'}}>{feedback}</p> : null}
         <label htmlFor="comment_text_box"></label>
-        <p id='comment-label'>Leave a comment</p><br></br>
+        <p className='comment-inline-display'>Leave a comment</p><br></br>
         <textarea name="comment_text_box" value={comment.body}  rows="7" cols="30" required onChange={handleInputChange}></textarea>
         <br></br>
-        <button disabled={loading===true} onClick={handleSubmit}>Submit</button>    
+        <button disabled={loading===true} >Submit</button>    
     </form>
     </>)
 

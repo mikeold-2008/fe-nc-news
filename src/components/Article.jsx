@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
-import { useParams } from 'react-router-dom';
-import { fetchArticleById } from "../utils/getFunctions";
-import CommentList from "./CommentList";
-import patchArticleVote from "../utils/patchFunctions";
-import ErrorPage from "./ErrorPage";
+import { useState, useEffect } from "react"
+import { useParams } from 'react-router-dom'
+import { fetchArticleById } from "../utils/getFunctions"
+import CommentList from "./CommentList"
+import patchArticleVote from "../utils/patchFunctions"
+import ErrorPage from "./ErrorPage"
 
 
 function Article(){
@@ -51,20 +51,20 @@ function Article(){
 
     return (
         <>
-        <div id="article">
+        <article id="article">
             <h1>{articleData.title}</h1>
             <img src={articleData.article_img_url} alt="" />
-            <p><b>{articleData.author}</b></p>
+            <p><strong>{articleData.author}</strong></p>
             <p>{articleData.body}</p>
             
-            <p><b> Votes: </b>{voteCount}</p>
+            <p><strong> Votes: </strong>{voteCount}</p>
             {error ? <p>{error}</p> : null}
             <p>
                 <button hidden={voteChange === 1} onClick={()=>{handleVote(1)}}>Like this article</button>  
 
                 <button hidden={voteChange < 1} onClick={()=>{handleVote(-1)}}>Unlike this article</button>                            
             </p>
-        </div>
+        </article>
         <br></br>
         <br></br>
 

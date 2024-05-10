@@ -1,9 +1,9 @@
 import { fetchCommentsByArticleId } from "../utils/getFunctions"
-import { useState, useEffect, useContext } from "react";
-import Comment from "./Comment";
-import CommentPostingForm from "./CommentPostingForm";
-import { UserContext } from "../contexts/User";
-import deleteCommentById from "../utils/deleteFunctions";
+import { useState, useEffect, useContext } from "react"
+import Comment from "./Comment"
+import CommentPostingForm from "./CommentPostingForm"
+import { UserContext } from "../contexts/User"
+import deleteCommentById from "../utils/deleteFunctions"
 
 function CommentList({article_id}){
 
@@ -52,13 +52,14 @@ function CommentList({article_id}){
    }
    
     return (
-       <div id="comment-list">
+       <section id="comment-list">
         <CommentPostingForm  
         err={err} setErr={setErr}
         feedback={feedback} setFeedback={setFeedback} commentList={commentList} setCommentList={setCommentList}></CommentPostingForm>
         <br></br>
         <br></br>
-        <h4>Comments</h4>
+        <br></br>
+        <h3 className="comment-inline-display">Comments</h3>
         {(commentList.length===0) ? <p>This article has no comments yet</p> : null}
         {commentList.map((comment,index)=>{
             return (<div id="comment-box" 
@@ -72,8 +73,7 @@ function CommentList({article_id}){
                     </div>
             )
         })}
-
-        </div>
+        </section>
         
 )
 }

@@ -1,11 +1,11 @@
 import { useState } from 'react'
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom"
 import './App.css'
 import NavBar from "./components/NavBar"
-import ArticleList from './components/ArticleList';
-import Article from './components/Article';
-import { UserProvider } from './contexts/User';
-import ErrorPage from './components/ErrorPage';
+import ArticleList from './components/ArticleList'
+import Article from './components/Article'
+import { UserProvider } from './contexts/User'
+import ErrorPage from './components/ErrorPage'
 
 
 
@@ -17,7 +17,6 @@ function App() {
 
   return (
     <UserProvider>
-      <div>
     <NavBar setSortCriteria={setSortCriteria} setSortOrder={setSortOrder} ></NavBar>
     <Routes>  
 
@@ -43,7 +42,6 @@ function App() {
 
     </Routes>
     
-    </div>
     </UserProvider>
   )
 }

@@ -1,7 +1,7 @@
 import { fetchArticles } from "../utils/getFunctions"
-import { useState, useEffect } from "react";
-import { Link, useParams, useSearchParams } from "react-router-dom";
-import ErrorPage from "./ErrorPage";
+import { useState, useEffect } from "react"
+import { Link, useParams, useSearchParams } from "react-router-dom"
+import ErrorPage from "./ErrorPage"
 
 function ArticleList({sortCriteria,sortOrder}){
 
@@ -40,21 +40,21 @@ function ArticleList({sortCriteria,sortOrder}){
     }
 
     return (
-        <div id="article-list">
+        <section id="article-list">
             {articleList.map((article,index)=>{
-                return <div id="article-list-item" key={index}>
+                return <article id="article-list-item" key={index}>
                     <Link to={`/articles/${article.article_id}`}>
                     <h3>{article.title}</h3>
                     </Link>
                     <Link to={`/articles/${article.article_id}`}>
                     <img src={article.article_img_url} alt="Featured image for an article" />
                     </Link>
-                    <p><b>Author: {article.author}</b></p>
-                    <p>Votes: {article.votes} Comments: {article.comment_count} Date: {article.created_at.slice(0,article.created_at.indexOf("T"))}</p>
-                    </div>
+                    <strong>Author: {article.author}</strong>
+                    <p id="article-card-info">{article.votes} votes<br></br> {article.comment_count} comments<br></br> Published: {article.created_at.slice(0,article.created_at.indexOf("T"))}</p>
+                    </article>
             })}
         
-        </div>
+        </section>
     )
 
 

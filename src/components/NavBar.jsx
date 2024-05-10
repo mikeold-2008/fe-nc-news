@@ -1,6 +1,7 @@
-import { Link } from "react-router-dom";
-import { useContext } from "react";
-import { UserContext } from "../contexts/User";
+import { Link } from "react-router-dom"
+import { useContext } from "react"
+import { UserContext } from "../contexts/User"
+import logo from '../assets/logo.png' 
 
 function NavBar ({setSortCriteria,setSortOrder}){
   const loggedInUser = useContext(UserContext)
@@ -9,9 +10,9 @@ function NavBar ({setSortCriteria,setSortOrder}){
 
 
     return (
-        <div id="navbar">
-          
-        <h1>NC News!</h1>
+        <nav id="navbar">
+        <img src={logo} alt="A dark blue logo with a picture of a bell and capitalised letter N, with the title Northcoders News " id="logo"/>
+        <br></br>
 
         <Link to="/">
         <button>Home</button>
@@ -41,7 +42,8 @@ function NavBar ({setSortCriteria,setSortOrder}){
         </select>
         </form>
         <p id="logged-in-user-display">Logged in as: {(loggedInUser.user)}</p>
-        </div>
+        
+        </nav>
       )
 
 }

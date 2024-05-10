@@ -2,7 +2,7 @@ function Comment ({body,author}){
 
     return(<>
     <p>{body}</p>
-    <b>{author}</b>
+    <strong>{author}</strong>
     </>)
 }
 export default Comment
